@@ -12,3 +12,23 @@ The plugin is inspired by:
 which in turn is based on an old version of
 [Olivier Verdier's plugin](https://github.com/olivierverdier/zsh-git-prompt),
 2) Anish Athalye's [asynchronous prompt idea](http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/).
+
+## screenshots
+
+Default configuration, clean repo, local branch equal to remote:
+
+![screenshot](screenshots/default-clean.png?raw=true)
+
+Local branch diverged from remote (1 commit behind, 2 commits ahead),
+4 files modified, but not staged, 3 files staged, 2 conflicts, 1 untracked
+file:
+
+![screenshot](screenshots/default-dirty.png?raw=true)
+
+Customized to look similar to powerline prompts, clean:
+
+![screenshot](screenshots/powerlineish-clean.png?raw=true)
+
+With some changes:
+
+![screenshot](screenshots/powerlineish-dirty.png?raw=true)
