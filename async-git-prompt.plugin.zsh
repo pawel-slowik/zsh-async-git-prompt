@@ -107,6 +107,7 @@ function git_get_status() {
 
 function git_parse_status_header() {
 	local branches divergence div
+	typeset -g RETURN_AHEAD RETURN_BEHIND RETURN_BRANCH
 	RETURN_AHEAD=0
 	RETURN_BEHIND=0
 	if [[ "$1" == *'Initial commit on '* ]]; then
@@ -144,6 +145,7 @@ function git_get_tag_or_hash() {
 	local log_string
 	local refs ref
 	local ret_hash ret_tag
+	typeset -g RETURN_TAG_OR_HASH
 	log_string="$(git log -1 --decorate=full --format="%h%d" 2> /dev/null)"
 	if [[ "$log_string" == *' ('*')' ]]; then
 		ret_hash="${log_string%% (*)}"
@@ -206,6 +208,7 @@ function git_prompt_hook() {
 }
 
 function git_prompt_init() {
+	typeset -g GIT_PROMPT_BG_PID
 	GIT_PROMPT_BG_PID=0
 	local fifo="$GIT_PROMPT_FIFO_DIR/$$.fifo"
 	mkdir -m 700 -p "$GIT_PROMPT_FIFO_DIR"
