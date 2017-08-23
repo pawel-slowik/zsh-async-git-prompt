@@ -168,7 +168,7 @@ function git_get_tag_or_hash() {
 }
 
 function git_prompt_completed_callback() {
-	local symbol line buffer=""
+	local symbol line k buffer=""
 	while read -t 0 -r -u 3 line; do
 		eval $line
 	done
