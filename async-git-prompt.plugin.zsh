@@ -86,7 +86,7 @@ function git_get_status() {
 			mapped_status=${GIT_STATUS_MAP[${chunk:0:2}]}
 			git_numbers[$mapped_status]=$((git_numbers[$mapped_status] + 1))
 		fi
-		if [[ "${chunk:0:2}" == R* ]]; then
+		if [[ "${chunk:0:2}" == R* || "${chunk:0:2}" == C* ]]; then
 			chunk_index=$((chunk_index + 2))
 		else
 			chunk_index=$((chunk_index + 1))
