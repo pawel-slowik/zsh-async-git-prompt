@@ -31,12 +31,15 @@ declare -A GIT_STATUS_MAP
 GIT_STATUS_MAP=(
 	' M' 'changed'    # not updated, work tree changed since index
 	' D' 'changed'    # not updated, deleted in work tree
+	' T' 'changed'    # type changed in work tree, not staged
 	'M ' 'staged'     # updated in index, index and work tree matches
 	'MM' 'changed'    # updated in index, work tree changed since index
 	'MD' 'changed'    # updated in index, deleted in work tree
+	'MT' 'changed'    # updated in index, type changed in work tree
 	'A ' 'staged'     # added to index, index and work tree matches
 	'AM' 'changed'    # added to index, work tree changed since index
 	'AD' 'changed'    # added to index, deleted in work tree
+	'AT' 'changed'    # added to index, type changed in work tree
 	'D ' 'staged'     # deleted from index
 	'DM' 'changed'    # deleted from index
 	'R ' 'staged'     # renamed in index, index and work tree matches
@@ -45,6 +48,10 @@ GIT_STATUS_MAP=(
 	'C ' 'staged'     # copied in index, index and work tree matches
 	'CM' 'changed'    # copied in index, work tree changed since index
 	'CD' 'changed'    # copied in index, deleted in work tree
+	'T ' 'staged'     # type changed in index, index and work tree matches
+	'TM' 'changed'    # type changed in index and matches type in work tree, content differs
+	'TD' 'changed'    # type changed in index, deleted in work tree
+	'TT' 'changed'    # type changed in index and differs from type in work tree
 	'DD' 'conflicts'  # unmerged, both deleted
 	'AU' 'conflicts'  # unmerged, added by us
 	'UD' 'conflicts'  # unmerged, deleted by them
