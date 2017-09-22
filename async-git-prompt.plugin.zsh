@@ -121,6 +121,10 @@ function git_parse_status_header() {
 		RETURN_BRANCH="${1/#*'Initial commit on '/}"
 		return
 	fi
+	if [[ "$1" == *'No commits yet on '* ]]; then
+		RETURN_BRANCH="${1/#*'No commits yet on '/}"
+		return
+	fi
 	if [[ "$1" == *'no branch'* ]]; then
 		git_get_tag_or_hash
 		RETURN_BRANCH="$RETURN_TAG_OR_HASH"
