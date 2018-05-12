@@ -27,6 +27,11 @@ GIT_PROMPT_SYMBOLS=(
 	"suffix" "%F{250}]%f"
 )
 
+# Remove right margin from $RPROMPT. In theory, setting ZLE_RPROMPT_INDENT
+# appropriately should be enough, but in practice results vary:
+# https://superuser.com/q/655607
+GIT_PROMPT_INDENT_HACK=1
+
 declare -A GIT_STATUS_MAP
 GIT_STATUS_MAP=(
 	' M' 'changed'    # not updated, work tree changed since index
@@ -64,6 +69,14 @@ GIT_STATUS_MAP=(
 )
 
 GIT_PROMPT_FIFO_DIR="$HOME/.tmp/zsh-git-prompt"
+
+if [[ $GIT_PROMPT_INDENT_HACK -eq 1 ]]; then
+	if [[ $TMUX_PANE ]]; then
+		export ZLE_RPROMPT_INDENT=0
+	else
+		export ZLE_RPROMPT_INDENT=1
+	fi
+fi
 
 function git_get_status() {
 	local status_string map_status chunk chunk_index mapped_status
@@ -186,6 +199,13 @@ function git_prompt_completed_callback() {
 	if [[ ${git_flags[in_repo]} -eq 1 ]]; then
 		for k in $GIT_PROMPT_ORDER; do
 			symbol="${GIT_PROMPT_SYMBOLS[$k]}"
+			if [[ $GIT_PROMPT_INDENT_HACK -eq 1 ]]; then
+				if [[ -z $TMUX_PANE ]]; then
+					if [[ $k == suffix ]]; then
+						symbol="%{$symbol%}"
+					fi
+				fi
+			fi
 			if [[ ${git_strings[$k]} != "" ]] then
 				buffer+="$symbol${git_strings[$k]}"
 			elif [[ ${git_numbers[$k]} != "" ]] then
