@@ -193,7 +193,7 @@ function git_get_tag_or_hash() {
 
 function git_prompt_completed_callback() {
 	local symbol line k buffer=""
-	while read -t 0 -r -u 3 line; do
+	while read -t 0 -r -u $GIT_PROMPT_DESCRIPTOR line; do
 		eval $line
 	done
 	if [[ ${git_flags[in_repo]} -eq 1 ]]; then
@@ -226,7 +226,7 @@ function git_prompt_completed_callback() {
 }
 
 function git_prompt_bg() {
-	git_get_status >&3
+	git_get_status >&$GIT_PROMPT_DESCRIPTOR
 	kill -s USR1 $$
 }
 
@@ -239,12 +239,12 @@ function git_prompt_hook() {
 }
 
 function git_prompt_init() {
-	typeset -g GIT_PROMPT_BG_PID
+	typeset -g GIT_PROMPT_BG_PID GIT_PROMPT_DESCRIPTOR
 	GIT_PROMPT_BG_PID=0
 	local fifo="$GIT_PROMPT_FIFO_DIR/$$.fifo"
 	mkdir -m 700 -p "$GIT_PROMPT_FIFO_DIR"
 	mkfifo -m 600 $fifo
-	exec 3<>$fifo
+	exec {GIT_PROMPT_DESCRIPTOR}<>$fifo
 	rm -f $fifo
 }
 
