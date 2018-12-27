@@ -1,36 +1,40 @@
-GIT_PROMPT_ORDER=(
-	"prefix"
-	"branch"
-	"behind"
-	"ahead"
-	"separator"
-	"staged"
-	"changed"
-	"conflicts"
-	"untracked"
-	"clean"
-	"suffix"
-)
+if [[ -z $GIT_PROMPT_ORDER ]]; then
+	GIT_PROMPT_ORDER=(
+		"prefix"
+		"branch"
+		"behind"
+		"ahead"
+		"separator"
+		"staged"
+		"changed"
+		"conflicts"
+		"untracked"
+		"clean"
+		"suffix"
+	)
+fi
 
-declare -A GIT_PROMPT_SYMBOLS
-GIT_PROMPT_SYMBOLS=(
-	"prefix" "%F{250}[%f"
-	"branch" "%F{120}"
-	"behind" "%F{216}%{←%G%}"
-	"ahead" "%F{216}%{→%G%}"
-	"separator" "%F{250}|%f"
-	"staged" "%F{117}%{♦%G%}"
-	"changed" "%F{226}%{◊%G%}"
-	"conflicts" "%F{9}%{≠%G%}"
-	"untracked" "%F{214}%{…%G%}"
-	"clean" "%F{10}%B%{✓%G%}%b"
-	"suffix" "%F{250}]%f"
-)
+if [[ -z $GIT_PROMPT_SYMBOLS ]]; then
+	declare -A GIT_PROMPT_SYMBOLS
+	GIT_PROMPT_SYMBOLS=(
+		"prefix" "%F{250}[%f"
+		"branch" "%F{120}"
+		"behind" "%F{216}%{←%G%}"
+		"ahead" "%F{216}%{→%G%}"
+		"separator" "%F{250}|%f"
+		"staged" "%F{117}%{♦%G%}"
+		"changed" "%F{226}%{◊%G%}"
+		"conflicts" "%F{9}%{≠%G%}"
+		"untracked" "%F{214}%{…%G%}"
+		"clean" "%F{10}%B%{✓%G%}%b"
+		"suffix" "%F{250}]%f"
+	)
+fi
 
 # Remove right margin from $RPROMPT. In theory, setting ZLE_RPROMPT_INDENT
 # appropriately should be enough, but in practice results vary:
 # https://superuser.com/q/655607
-GIT_PROMPT_INDENT_HACK=1
+: ${GIT_PROMPT_INDENT_HACK:=1}
 
 declare -A GIT_STATUS_MAP
 GIT_STATUS_MAP=(

@@ -13,6 +13,15 @@ which in turn is based on an old version of
 [Olivier Verdier's plugin](https://github.com/olivierverdier/zsh-git-prompt),
 2) Anish Athalye's [asynchronous prompt idea](http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/).
 
+## configuration
+
+You can set any the following variables before loading the plugin:
+
+- `$GIT_PROMPT_ORDER` - determines the order of elements (modified / staged /
+  untracked etc.),
+- `$GIT_PROMPT_SYMBOLS` - what to display before each element,
+- `$GIT_PROMPT_INDENT_HACK` - try 0 or 1 if the prompt seems misaligned.
+
 ## screenshots
 
 Default configuration, clean repo, local branch equal to remote:
@@ -25,7 +34,8 @@ file:
 
 ![screenshot](screenshots/default-dirty.png?raw=true)
 
-Customized to look similar to powerline prompts, clean:
+Customized to look similar to powerline prompts (see
+async-git-prompt.config-example.zsh), clean:
 
 ![screenshot](screenshots/powerlineish-clean.png?raw=true)
 
